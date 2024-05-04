@@ -1,0 +1,10 @@
+O que é Dado?
+Resposta: Elemento cru (bruto), originário de uma entrada de usuário ou sistema.
+Analogia: Átomos de uma célula do nosso orgaorganismo (elementos pequenos que juntos formam uma célula).
+
+O que é informação?
+Resposta: Elemento processado (polido) que contém dados. A informação é proveniente do processamento de dados. 
+Analogia: Célula do nosso orgaorganismo (necessita de vários átomos (dados) para ser formada).
+
+Ciclo: Dado > Informação > Conhecimento
+Ou seja: Um ou mais "dados" geram uma "informação" que por sua vez gera um "conhecimento"
