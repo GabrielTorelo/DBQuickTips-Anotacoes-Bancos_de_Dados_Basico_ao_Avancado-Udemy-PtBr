@@ -1,0 +1,3 @@
+Por que estudar essa arquitetura?
+  Resposta: Quando nós referimos a Banco de Dados, estamos sempre falando de uma arquitetura "Cliente-Servidor".
+  Ou seja: É uma arquitetura distribuída, possuindo na rede o fornecedor de recursos ou serviços (servidores) e os requerentes desses recursos ou serviços (clientes). Desta forma, o cliente solicita alguma função do servidor (sem disponibilizar nenhum recurso) e o servidor aguarda receber requisições de entrada, processa essas requisições e devolve uma resposta.
