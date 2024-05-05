@@ -1,0 +1,30 @@
+Modelo Relacional:
+  O que é SQL (Structured Query Language | Linguagem de Consulta Estruturada)?
+    Resposta: É uma linguagem utilizada para se comunicar com "Bancos de Dados Relacionais"
+  Qual o conceito do modelo relacional?
+    Resposta: Seu conceito é baseado no armazenamento de dados em tabelas, nas quais as tabelas podem ou não estarem relacionadas entre si.
+  Quais os pontos fortes?
+    Resposta: Fornece processos de validações, recuperações, otimizações e garantias de integridade dos dados ao utilizar um SGBD (Sistema Gerenciador de Bancos de Dados).
+  Quais os pontos fracos?
+    Resposta: Dificuldade na escalabilidade do sistema (Banco de Dados) e organização dos dados em um sistema distribuído.
+
+Modelo Não Relacional:
+  O que é NoSQL (Not Only SQL | Não Apenas SQL)?
+    Resposta: É uma solução de "Banco de Dados" que não trabalha diretamente com a interface SQL
+  Bancos de Dados não relacionais usam SQL?
+    Resposta: Esse modelo nós permite maior flexibilidade na comunicação com o "Banco de Dados", podendo utilizar SQL junto a outro método para essa comunicação.
+    Dica: O significado da sigla (NoSQL) já nós dá uma pista sobre o uso de SQL.
+  Qual o conceito do modelo não relacional?
+    Resposta: Seu conceito é baseado no armazenamento de dados orientados a documentos e colunas.
+  Qual o diferencial ao se trabalhar com NoSQL?
+    Resposta: Melhor performance, pois, não possuindo um modelo estruturado em tabelas sua manipulação de dados é feita de forma muito mais rápida.
+  Quais suas características a serem levadas em consideração?
+    Resposta: Alta disponibilidade e escalabilidade.
+  Como são armazenados os dados nesse modelo?
+    Resposta: O seu armazenamento muitas vezes é baseado em um modelo de armazenamento de chave/valor.
+    Analogia: Podemos facilmente fazer uma analogia ao JSON (JavaScript Object Notation)
+    Exemplo:
+      {
+        Nome: 'Gabriel';
+        Idade: 24
+      }
