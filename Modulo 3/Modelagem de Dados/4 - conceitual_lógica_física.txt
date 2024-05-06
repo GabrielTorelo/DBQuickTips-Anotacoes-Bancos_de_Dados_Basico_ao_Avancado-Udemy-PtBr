@@ -1,0 +1,100 @@
+Modelo de Dados:
+  O que contém?
+    Resposta: Dados da estrutura do "Banco de Dados" (Nome do "Banco de Dados", quais tabelas possui, quais os campos das tabelas).
+  Qual o seu conceito?
+    Resposta: O conceito de um modelo de dados não informa quais dados estão armazenados e sim apenas quais e que tipos de dados contém.
+  Quais os conceitos essenciais?
+    Entidade: Objeto ou Evento na qual desejamos manter registros.
+      Exemplos: Aluno, Carro, Produto, etc.
+    Atributo: Propriedade ou Característica que descreve uma entidade.
+      Exemplo:
+        Produto {
+          código: string;
+          descrição: string;
+          preço: number;
+        }
+    Atributo Chave (Primary Key): Atributo usado para identificar unicamente um registro na tabela.
+      Exemplo:
+        id: 521575432452;
+    Chave Estrangeira (Foreign Key): Atributo que indica um relacionamento e representa a chave primária de uma outra entidade.
+      Exemplo:
+        Cliente {
+          idCliente: string; => 123456
+        },
+        Pedido {
+          idProd: string; => 654321
+          fkCliente: string; => 123456
+        }
+    Relacionamento: De extrema importância, o relacionamento dita a associação entre entidades. Essa associação pode ocorrer entre uma ou mais entidades.
+      Exemplo:
+        Produto → É do Tipo → Tipo de Produto
+    Grau de Relacionamento: Indica a quantidade de entidades ligadas a um relacionamento.
+      Quais são eles?
+        Resposta:
+          Unário (grau 1): Quando uma entidade se relaciona com ela mesma.
+          Binário (grau 2): Quando uma entidade se relaciona com outra entidade.
+          Ternário (grau 3): Quando três entidades estão relacionadas em um mesmo relacionamento.
+    Cardinalidade: 
+      Máxima: Define a quantidade máxima de ocorrências que uma entidade pode estar associada a outra entidade.
+        Relacionamento (1:1): Indica uma entidade pode se relacionar exclusivamente com outra entidade e viceversa
+          Exemplo: Um vendedor ocupa um único escritório e um escritório pode ser ocupado por umúnico vendedor.
+        Relacionamento (1:n): - Indica que uma entidade pode se relacionar com várias ocorrências de outra entidade.
+          Exemplo: Um vendedor atende muitos clientes, porém, cada cliente é atendido por apenas um vendedor específico.
+        Relacionamento (n:m): Indica que uma ocorrência pode se relacionar com várias ocorrências de outra entidade e viceversa.
+          Exemplo: Um vendedor atende muitos clientes, e um cliente pode ser atendido por diversos vendedores.
+      Mínima: Define a quantidade mínima de ocorrências que uma entidade precisa estar associada a outra entidade.
+        Exemplo: Um vendedor ocupa um único escritório, porém, é obrigatório que ele tenha um escritório.
+
+Modelagem Conceitual (Modelo Conceitual) - DER | MER (Diagrama de Entidade e Relacionamento | Modelo de Entidade e Relacionamento):
+  Qual o nível do modelo?
+    Resposta: Esse modelo é considerado de alto nível (alto nível de abstração).
+    Ou seja: Está o mais próximo possível do usuário.
+  Exemplo:
+    Cliente {
+      nome: string;
+      endereco: string;
+      numero: number;
+      bairro: string;
+      cidade: string;
+    },
+    Pedido {
+      idProd: string;
+      idCliente: string;
+      quantidade: number;
+    }
+
+Modelagem Lógica (Modelo Lógico ou Modelo de Implementação):
+  O que esse modelo descreve?
+    Resposta: O modelo descreve como os dados serão armazenados, seus relacionamentos e a modelagem que será utilizada (Relacional ou Não Relacional).
+  Quais os dados devem serem levantados nesse modelo?
+    Resposta: Nome do Campo, Tipo do Dado e Tamanho do Campo.
+  Exemplo:
+    Produto {
+      {
+        id: 10;
+        descricao: Desktop;
+        preco: 1.2000,00;
+        idTipo: 1;
+      },
+      {
+        id: 20;
+        descricao: Laptop;
+        preco: 1.8000,00;
+        idTipo: 1;
+      }
+    }
+
+Modelagem Física (Modelo Físico):
+  Qual o conceito desse modelo?
+    Resposta: Seu conceito descreve, por meio de uma linguagem (exemplo: SQL), como será feito o armazenamento no "Banco de Dados".
+  Quais os dados devem serem levantados nesse modelo?
+    Resposta: Nome do Campo, Tipo do Dado e Tamanho do Campo.
+  Exemplo:
+    CREATE TABLE `turma` (
+      `idTurma` INTEGER(4) NOT NULL AUTO_INCREMENT,
+      `capacidade` INTEGER(2) NOT NULL,
+      `idProfessor` INTEGER(4) NOT NULL,
+      PRIMARY KEY(`idTurma`),
+      FOREIGN KEY(`idProfessor`) REFERENCES professor(idProfessor),
+      UNIQUE KEY `idTurma` (`idTurma`)
+    )
