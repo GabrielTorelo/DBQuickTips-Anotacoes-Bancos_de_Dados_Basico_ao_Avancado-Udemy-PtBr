@@ -1,0 +1,58 @@
+Como a linguagem SQL é dividida?
+  Resposta: A linguagem SQL é dividida em 5 subgrupos, sendo eles:
+    * DQL - Data Query Language (Linguagem de Consulta de Dados):
+      O que ele disponibiliza?
+        Resposta: Disponibiliza comandos para serem feitas consultas de dados.
+      Quais comandos possui?
+        Resposta: Possui o comando SELECT.
+          Conceito: Usado para selecionar e retornar campos de uma tabela.
+          Exemplos:
+            1 - Selecionar todos os dados de uma tabela:
+              SELECT * FROM tipo_produto;
+            2 - Selecionar o código dos produtos de uma tabela:
+              SELECT codigo FROM produto;
+      Podemos dar um apelido na chamada?
+        Resposta: Sim, podemos apelidar os campos usando o "AS"
+          Exemplo:
+            SELECT codigo AS cod FROM produto;
+    * DML - Data Manipulation Language (Linguagem de Manipulação de Dados):
+      O que possui?
+        Resposta: Disponibiliza comandos para serem feitas manipulações de dados.
+      Quais comandos possui?
+        Resposta: Possui os comandos:
+          * INSERT:
+            Conceito: Usado para inserir um registro em uma tabela existente.
+            Exemplos:
+              1 - Inserir 1 registro na tabela tipo_produto:
+                INSERT INTO tipo_produto (descricao) VALUES ('Notebook');
+              2 - Inserir 3 registros na tabela produto:
+                INSERT INTO produto (descricao, preco) VALUES ('Notebook', 3.900,00);
+          * UPDATE:
+            Conceito: Usado para alterar registros em uma tabela existente.
+            Exemplos:
+              1 - Alterar 1 registro na tabela tipo_produto:
+                UPDATE tipo_produto set descricao = 'Nobreak' WHERE codigo = 3;
+              2 - Alterar 2 registros na tabela produto:
+                UPDATE produto set descricao = 'Notebook', preco = 3.000,00 WHERE codigo = 20;
+          * DELETE:
+            Conceito: Usado para remover registros em uma tabela existente.
+            Exemplo:
+              1 - Remover 1 tabela do "Banco de Dados":
+                DELETE FROM tipo_produto;
+
+
+    * DDL - Data Definition Language (Linguagem de Definição de Dados):
+      O que possui?
+          Resposta: Disponibiliza comandos para criação de BDs, criação de tabelas, criação de campos, ou seja, tudo referente a definição de dados.
+      Quais comandos possui?
+        Resposta: Possui o comando 
+    * DCL - Data Control Language (Linguagem de Controle de Dados):
+      O que possui?
+          Resposta: Disponibiliza comandos para controle de acesso aos dados, por meio de "papeis" no sistema do "Banco de Dados".
+      Quais comandos possui?
+        Resposta: Possui o comando 
+    * DTL - Data Transaction Language (Linguagem de Transação de Dados):
+      O que possui?
+          Resposta: Disponibiliza comandos relacionados as transações, ou seja, uma operações no "Banco de Dados".
+      Quais comandos possui?
+        Resposta: Possui o comando 
