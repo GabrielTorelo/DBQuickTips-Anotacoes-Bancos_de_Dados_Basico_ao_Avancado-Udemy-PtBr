@@ -1,0 +1,5 @@
+O que precisamos fazer?
+  Resposta: 
+    * Encontrar as entidades
+    * Definir os atributos
+    * Definir os relacionamentos
