@@ -1,0 +1,11 @@
+Modelo Entidade Relacionamento (MER):
+  Passo a Passo (MySQL - Workbench):
+    1 - Criar um modelo
+    2 - Nomear o modelo
+    3 - Salvar o modelo
+    4 - Criar as entidades
+    5 - Criar os atributos da tabela
+    6 - Selecionar os tipos de dados para os atributos
+    7 - Definir a chave primária (PK)
+    8 - Definir as chaves estrangeiras (Fks)
+    9 - Exportar o diagrama (PDF)
