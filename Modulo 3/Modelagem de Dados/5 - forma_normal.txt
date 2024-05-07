@@ -1,0 +1,18 @@
+Normalização de Dados:
+  Qual o conceito da normalização de dados?
+    Resposta: É chamado de normalização de dados o processo de análise e definição das entidades, atributos, relacionamentos, chaves primárias e chaves estrangeiras do banco de dados a ser modelado.
+  Por que é necessária a normalização dos dados?
+    Resposta: É necessária afim de evitar ou pelo menos amenizar anomalias e inconsistências que podem ocorrer durante a inclusão, exclusão, alteração e consulta de registros em um banco de dados.
+  Quantas formas de normalização existem?
+    Resposta: Em regra, existem 3 formas de normalização (1FN, 2FN e 3FN) e caso o "Banco de Dados" esteja em conforme com essas 3 formas normais o banco é considerado como "normalizado".
+      Primeira Forma Normal (1FN):
+        Regra a seguir:
+          * Todos os campos devem serem "atômicos" (simples), ou seja, NÃO POSSUIR MÚLTIPLOS VALORES.
+      Segunda Forma Normal (2FN):
+        Regras a serem seguidas:
+          * Estar na "Primeira Forma Normal".
+          * Todos os atributos (não chaves) não devem serem totalmente dependentes da chave primária.
+      Terceira Forma Normal:
+        Regra a seguir:
+            * Estar na "Segunda Forma Normal".
+            * Eliminar os campos que podem serem obtidos a partir de outros campos da tabela.
