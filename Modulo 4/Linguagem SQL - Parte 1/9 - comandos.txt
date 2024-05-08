@@ -4,13 +4,14 @@ Como a linguagem SQL é dividida?
       O que ele disponibiliza?
         Resposta: Disponibiliza comandos para serem feitas consultas de dados.
       Quais comandos possui?
-        Resposta: Possui o comando SELECT.
-          Conceito: Usado para selecionar e retornar campos de uma tabela.
-          Exemplos:
-            1 - Selecionar todos os dados de uma tabela:
-              SELECT * FROM tipo_produto;
-            2 - Selecionar o código dos produtos de uma tabela:
-              SELECT codigo FROM produto;
+        Resposta: Possui o comando:
+          * SELECT:
+            Conceito: Usado para selecionar e retornar campos de uma tabela.
+            Exemplos:
+              1 - Selecionar todos os dados de uma tabela:
+                SELECT * FROM tipo_produto;
+              2 - Selecionar o código dos produtos de uma tabela:
+                SELECT codigo FROM produto;
       Podemos dar um apelido na chamada?
         Resposta: Sim, podemos apelidar os campos usando o "AS"
           Exemplo:
@@ -39,20 +40,68 @@ Como a linguagem SQL é dividida?
             Exemplo:
               1 - Remover 1 tabela do "Banco de Dados":
                 DELETE FROM tipo_produto;
-
-
+              2 - Remover 1 registro na tabela produto:
+                DELETE FROM produto WHERE codigo = 3;
     * DDL - Data Definition Language (Linguagem de Definição de Dados):
       O que possui?
-          Resposta: Disponibiliza comandos para criação de BDs, criação de tabelas, criação de campos, ou seja, tudo referente a definição de dados.
+        Resposta: Disponibiliza comandos para criação de BDs, criação de tabelas, criação de campos, ou seja, tudo referente a definição de dados.
       Quais comandos possui?
-        Resposta: Possui o comando 
+        Resposta: Possui os comandos:
+          * CREATE:
+            Conceito: Usado para criar um "Banco de Dados", tabelas, entre outros.
+            Exemplos:
+              1 - Criar um "Banco de Dados":
+                CREATE DATABASE teste;
+              2 - Criar uma tabela:
+                CREATE TABLE produto (codigo INT PRIMARY KEY, descricao VARCHAR(45));
+          * ALTER:
+            Conceito: Usado para alterar a estrutura de tabelas, entre outros.
+            Exemplo:
+              1 - Alterar a estrutura de uma tabela, adicionando um novo campo:
+                ALTER TABLE produto ADD peso DECIMAL(8,2);
+          * DELETE:
+            Conceito: Usado para deletar um "Banco de Dados", tabelas, entre outros.
+            Exemplo:
+              1 - Remover um "Banco de Dados":
+                DROP DATABASE teste;
+              2 - Remover uma tabela:
+                DROP TABLE produto;
     * DCL - Data Control Language (Linguagem de Controle de Dados):
       O que possui?
           Resposta: Disponibiliza comandos para controle de acesso aos dados, por meio de "papeis" no sistema do "Banco de Dados".
       Quais comandos possui?
-        Resposta: Possui o comando 
+        Resposta: Possui os comandos:
+          * GRANT:
+            Conceito: Usado para autorizar um usuário a executar uma operação no "Banco de Dados".
+            Exemplo:
+              1 - Permitir a consulta em uma tabela:
+                GRANT SELECT ON produto TO admGabriel;
+          * REVOKE:
+            Conceito: Usado para revogar o acesso de um usuário na executação de uma operação no "Banco de Dados".
+            Exemplos:
+              1 - Remover a consulta em uma tabela:
+                REVOKE SELECT ON produto FROM userGabriel;
+              2 - Remover a permissão de criação de tabelas:
+                REVOKE CREATE TABLE FROM userGabriel;
     * DTL - Data Transaction Language (Linguagem de Transação de Dados):
       O que possui?
-          Resposta: Disponibiliza comandos relacionados as transações, ou seja, uma operações no "Banco de Dados".
+          Resposta: Disponibiliza comandos relacionados as transações, ou seja, uma operação no "Banco de Dados".
       Quais comandos possui?
-        Resposta: Possui o comando 
+        Resposta: Possui os comandos:
+          * BEGIN (START TRANSACTION):
+            Conceito: Usado para marcar o início de uma transação.
+            Exemplo:
+              1 - Iniciar uma transação para inserção de 2 registros (sendo 'T1' o nome da transação):
+                BEGIN TRANSACTION T1;
+                  INSERT INTO tipo_produto VALUES ('Notebook');
+                  INSERT INTO tipo_produto VALUES ('Nobreak');
+          * COMMIT:
+            Conceito: Usado para finalizar uma transação.
+            Exemplo:
+              1 - Terminar uma transação iniciada anteriormente
+                COMMIT TRANSACTION T1;
+          * ROLLBACK:
+            Conceito: Usado para reverter as alterações atuais e ir para a última transação (último COMMIT).
+            Exemplo:
+              1 - Reverter uma transação ainda não terminada (ou seja, só é possível reverter transações que não foram dadas o comando "COMMIT"):
+                ROLLBACK TRANSACTION T1;
