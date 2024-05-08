@@ -1,0 +1,114 @@
+Filtrando Consultas com WHERE:
+  O que ele disponibiliza?
+    Resposta: Disponibiliza uma filtragem dos dados consultados
+    Exemplos:
+      1 - Selecionar uma coluna específica de uma tabela (código igual a 1):
+        SELECT * FROM produto WHERE codigo = 1;
+      2 - Selecionar uma coluna específica de uma tabela (tipo igual a 'Notebook'):
+        SELECT * FROM dispositivo WHERE tipo = 'Notebook';
+
+Consultas em Múltiplas Tabelas:
+  Qual o conceito para realizar uma busca múltipla?
+    Resposta: O conceito se baseia em filtrar a chave estrangeira de uma tabela e referencia-la a chave primária da outra tabela.
+  O que ele possibilita?
+    Resposta: Possibilita consultar várias tabelas em uma mesma consulta
+    Exemplos:
+      1 - Consultar o tipo do produto e o preço do produto:
+        SELECT prod.cod AS codigo, prod.preco AS preco, tipo.desc AS descricao 
+          FROM produto AS prod, tipo_produto AS tipo
+          WHERE prod.codigo_tipo_produto = tipo.codigo;
+      2 - Sem o uso de 'Aliases' (comando 'AS'):
+        SELECT idFuncionario, nome, nomeCargo
+          FROM funcionario, cargo
+          WHERE funcionario.idCargo = cargo.codigo;
+
+Junção de Tabelas:
+  Como é feita a junção de tabelas?
+    Resposta: Para criarmos uma junção de tabelas devemos definir os critérios de agrupamento para trazer estes dados.
+    Ou seja: É criada uma pseudo-tabela derivada de duas ou mais tabelas de acordo com as regras especificadas.
+  Junção de produto cartesiano:
+    Conceito: Essa junção (produto cartesiano), geralmente entre duas tabelas, origina uma terceira tabela com os dados de ambas as tabelas combinados.
+    Exemplo:
+      1 - Consultar o nome e o cargo do cliente, sendo o nome da tabela 'cliente' e o cargo da tabela 'profissão':
+        SELECT c.idCliente, c.nome, p.cargo
+          FROM cliente AS c, profissao AS p
+          WHERE c.idProfissao = p.idProfissao;
+  Junção Interna (Inner Join):
+    Conceito: Essa junção (inner join), é uma consulta que retorna apenas os dados que atendem às condições de junção.
+    Ou seja: Quais linhas de uma tabela se relacionam com as linhas de outras tabelas.
+    Analogia: Podemos fazer uma analogia da cláusula 'ON' (usada na junção 'inner join') com a cláusula 'WHERE' (usada na junção de 'produto cartesiano').
+    Exemplo:
+      1 - Consultar o nome e o cargo do cliente, sendo o nome da tabela 'cliente' e o cargo da tabela 'profissão' (mesmo resultado que a junção de 'produto cartesiano'):
+        SELECT c.idCliente, c.nome, p.cargo
+          FROM cliente AS c INNER JOIN profissao AS p
+          ON c.idProfissao = p.idProfissao;
+  Junção Externa (Outer Join):
+    Conceito: Essa junção (Outer Join), é uma consulta que não requer que os registros de uma tabela possuam registros equivalentes em outra tabela.
+    Ou seja: Essa junção se subdivide dependendo da tabela que admitiremos os registros que não possuem correspondência:
+    Exemplos:
+      * Esquerda (Left):
+        Conceito: A tabela a esquerda será ordenada com base na tabela a direita.
+        Ou seja: Retorna SEMPRE todos os registros da tabela à esquerda (mesmo se não existir registro), caso não exista registro o valor NULL é retornado.
+        Exemplo:
+          1 - Consultar os dados das tabelas cliente e profissão com os dados da tabela profissão correspondendo aos dados da tabela cliente:
+            SELECT * FROM cliente AS c
+              LEFT OUTER JOIN profissao AS p
+              ON c.idProfissao = p.idProfissao;
+      * Direita (Right):
+        Conceito: A tabela a direita será ordenada com base na tabela a esquerda.
+        Ou seja: Retorna SEMPRE todos os registros da tabela à direita (mesmo se não existir registro), caso não exista registro o valor NULL é retornado.
+        Exemplo:
+          1 - Consultar os dados das tabelas cliente e profissão com os dados da tabela cliente correspondendo aos dados da tabela profissão:
+            SELECT * FROM cliente AS c
+              RIGHT OUTER JOIN profissao AS p
+              ON c.idProfissao = p.idProfissao
+      * Ambas (Full):
+        Conceito: Nessa consulta serão apresentados todos os dados das tabelas à esquerda e à direita, mesmo que não possuam correspondência na outra tabela.
+        Ou seja: A pseudo-tabela possuirá assim todos os registros de ambas as tabelas (mesmo se não existir registro), caso não exista registro o valor NULL é retornado.
+        Exemplos:
+          1 - Consultar os dados das tabelas cliente e profissão, de acordo com suas correspondências:
+            SELECT * FROM cliente AS c
+              FULL OUTER JOIN profissao AS p
+              ON c.idProfissao = p.idProfissao
+          2 - Mesmo exemplo do '1', porém, no contexto do 'MySQL':
+            SELECT * FROM cliente AS c
+              LEFT OUTER JOIN profissao AS p
+              ON c.idProfissao = p.idProfissao
+            UNION
+            SELECT * FROM cliente AS c
+              RIGHT OUTER JOIN profissao AS p
+              ON c.idProfissao = p.idProfissao;
+  Junção Cruzada (Cross Join):
+    Conceito: Usada quando desejamos unir tabelas por cruzamento.
+    Ou seja: Para cada linha da tabela queremos realizar uma união com os dados de outra tabela.
+    Exemplo:
+      1 - Consultar cada cliente e colocar uma linha com cada profissão.
+        SELECT c.idCliente, c.nome, c.data_nasc, c.telefone, p.cargo
+          FROM cliente AS c
+          CROSS JOIN profissao AS p;
+  Auto Junção (Self Join):
+    Conceito: Usada para unir uma tabela a si mesma.
+    Exemplo:
+      1 - Consultar na tabela os IDs diferentes, porém, as cidades iguais (desejo consultar os consumidores que moram na mesma cidade)
+        SELECT cons1.nome AS Consumidor_1, cons2.nome AS Consumidor_2, cons1.cidade
+          FROM consumidor AS cons1
+          INNER JOIN consumidor AS cons2
+          ON cons1.id <> cons2.id
+          AND cons1.cidade = cons2.cidade;
+  Junção Baseada em Comparador (Equi-Join):
+    Conceito: Usada para realização de comparações de igualdade na junção.
+    Ou seja: Realiza uma comparação de igualdade e une as tabelas.
+    Exemplo:
+      1 - Consultar todos os dados das tabelas 'cliente' e 'profissao' comparando o 'idProfissao':
+        SELECT *
+          FROM cliente AS c
+          JOIN profissao AS p
+          ON c.idProfissao = p.idProfissao;
+  Junção Natutal (Natural Join):
+    Conceito: Usada para unir tabelas, não duplicando as combinações que são iguais em seus nomes de atributos comuns.
+    Ou seja: Caso tenha uma chave estrangeira entre duas tabelas, é gerada apenas 1 coluna com o ID da mesma.
+    Exemplo:
+      1 - Consultar todos os dados das tabelas 'cliente' e 'profissao', gerando apenas 1 coluna para os atributos iguais:
+        SELECT *
+          FROM cliente
+          NATURAL JOIN profissao;
