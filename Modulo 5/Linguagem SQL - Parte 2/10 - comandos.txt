@@ -155,3 +155,32 @@ Funções de Agregação:
         Exemplo:
           1 - Calcular a quantidade de produtos cadastrados com a categoria 1.
             SELECT COUNT(preco) AS Quantidade FROM produto WHERE idCategoria = 1;
+
+Funções de Agrupamento e Ordenação:
+  Conceito: Recursos nativos para agrupar e/ou ordernar os resultados para uma melhor apresentação.
+  Quais os tipos de Agrupamento existentes?
+    Resposta:
+      * Agrupar por (GROUP BY):
+        Conceito: Usado para agrupar elementos do mesmo tipo.
+        Exemplo:
+          1 - Consultar o valor médio dos produtos em cada categoria:
+            SELECT idCategoria, AVG(preco) FROM produto GROUP BY idCategoria;
+      * Tendo (HAVING):
+        Analogia: Podemos fazer uma analogia da cláusula 'HAVING' (usada no agrupamento e ordenação) com a cláusula 'WHERE' (usada geralmente com o SELECT).
+        Exemplo:
+          1 - Consultar o maior preço de venda em cada categorias de produtos, na qual o preço seja maior que 10,00:
+            SELECT idCategoria, MAX(preco) FROM produto GROUP BY idCategoria HAVING MAX(preco) > 10;
+      * Ordenar por (ORDER BY):
+        Conceito: Usado para organizar os dados em ordem alfabética ou numérica.
+        Quais os tipos de ordenação existentes?
+          Resposta:
+            * Ascendente (ASC):
+              Conceito: Essa ordenação é do menor para o maior. Por padrão é sempre ordenado pelo ascendente, levando em consideração o 'id'
+              Exemplo:
+                1 - Ordenar os preços dos produtos do mais barato para o mais caro:
+                  SELECT nome, preco FROM produto ORDER BY preco ASC;
+            * Descendente (DESC):
+              Conceito: Essa ordenação é do maior para o menor.
+              Exemplo:
+                1 - Ordenar os preços dos produtos do mais caro para o mais barato:
+                  SELECT nome, preco FROM produto ORDER BY preco DESC;

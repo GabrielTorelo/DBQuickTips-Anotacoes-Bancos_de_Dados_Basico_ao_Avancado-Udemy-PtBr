@@ -1,6 +1,6 @@
-CREATE DATABASE juncao;
+CREATE DATABASE teste;
 
-USE juncao;
+USE teste;
 
 CREATE TABLE profissao(
   idProfissao INT NOT NULL AUTO_INCREMENT,
@@ -10,10 +10,10 @@ CREATE TABLE profissao(
 
 CREATE TABLE cliente(
   idCliente INT NOT NULL AUTO_INCREMENT,
+  idProfissao INT NOT NULL,
   nome VARCHAR(100) NOT NULL,
   data_nasc DATE NOT NULL,
   telefone VARCHAR(14) NOT NULL,
-  idProfissao INT NOT NULL,
   PRIMARY KEY (idCliente),
   FOREIGN KEY (idProfissao) REFERENCES profissao(idProfissao)
 );
@@ -34,14 +34,29 @@ CREATE TABLE categoria(
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE tipo(
+	idTipo INT NOT NULL AUTO_INCREMENT,
+	nome VARCHAR(60) NOT NULL,
+	PRIMARY KEY (idTipo)
+);
+
+CREATE TABLE fabricante(
+	idFabricante INT NOT NULL AUTO_INCREMENT,
+	nome VARCHAR(60) NOT NULL,
+	PRIMARY KEY (idFabricante)
+);
+
 CREATE TABLE produto(
-	idProduto INT NOT NULL AUTO_INCREMENT, 
-	descricao VARCHAR(60) NOT NULL,
-	preco_venda DECIMAL(8,2) NOT NULL,
-	preco_custo DECIMAL(8,2) NOT NULL,
+	idProduto INT NOT NULL AUTO_INCREMENT,
+  idFabricante INT NOT NULL,
+  idTipo INT NOT NULL,
 	idCategoria int NOT NULL,
+	descricao VARCHAR(60) NOT NULL,
+	preco DECIMAL(8,2) NOT NULL,
 	PRIMARY KEY (idProduto),
 	FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria)
+  FOREIGN KEY (idFabricante) REFERENCES fabricante(idFabricante),
+	FOREIGN KEY (idTipo) REFERENCES tipo(idTipo)
 );
 
 INSERT INTO profissao (cargo) VALUES ('Programador');
@@ -58,7 +73,17 @@ INSERT INTO consumidor (nome, telefone, endereco, cidade, cep, pais) VALUES ('Jo
 INSERT INTO consumidor (nome, telefone, endereco, cidade, cep, pais) VALUES ('Marcos Vinicius', '+5514915245678', 'Rua de Novo', 'Cityzinha', '78632-000', 'Brasil');
 INSERT INTO consumidor (nome, telefone, endereco, cidade, cep, pais) VALUES ('Pedro Luiz', '+5514919645678', 'Av. das Avenidas', 'Cityzona', '97611-123', 'Brasil');
 
-INSERT INTO produto (descricao, preco_venda, preco_custo, idCategoria) VALUES ('Caderno', '5.45', '2.30', 1);
-INSERT INTO produto (descricao, preco_venda, preco_custo, idCategoria) VALUES ('Caneta', '1.20', '0.45', 1);
-INSERT INTO produto (descricao, preco_venda, preco_custo, idCategoria) VALUES ('Pendrive 32GB', '120.54', '32.55', 2);
-INSERT INTO produto (descricao, preco_venda, preco_custo, idCategoria) VALUES ('Mouse', '17.00', '4.30', 2);
+INSERT INTO categoria (nome) VALUES ('Material Escolar');
+INSERT INTO categoria (nome) VALUES ('Acessório Informática');
+
+INSERT INTO tipo (nome) VALUES ('Escolar');
+INSERT INTO tipo (nome) VALUES ('Informática');
+
+INSERT INTO fabricante (nome) VALUES ('Sony');
+INSERT INTO fabricante (nome) VALUES ('Bic');
+INSERT INTO fabricante (nome) VALUES ('Tilibra');
+
+INSERT INTO produto (descricao, preco, idCategoria, idTipo, idFabricante) VALUES ('Caderno', '5.45', 1, 1, 3);
+INSERT INTO produto (descricao, preco, idCategoria, idTipo, idFabricante) VALUES ('Caneta', '1.20', 1, 1, 2);
+INSERT INTO produto (descricao, preco, idCategoria, idTipo, idFabricante) VALUES ('Pendrive 32GB', '120.54', 2, 1, 1);
+INSERT INTO produto (descricao, preco, idCategoria, idTipo, idFabricante) VALUES ('Mouse', '17.00', 2, 1, 1);
