@@ -112,3 +112,46 @@ Junção de Tabelas:
         SELECT *
           FROM cliente
           NATURAL JOIN profissao;
+
+Funções de Agregação:
+  Conceito: Funções nativas para agregar um conjunto de valores em um único resultado.
+  Quais são elas?
+    Resposta:
+      * Máximo (MAX):
+        Conceito: Usado para analisar um conjunto de valores e retorna o maior entre eles.
+        Exemplos:
+          1 - Consultar o produto com maior valor:
+            SELECT MAX(preco) FROM produto;
+          2 - Consultar o maior preço de venda em cada categoria de produto:
+            SELECT idCategoria, MAX(preco) FROM produto GROUP BY idCategoria;
+      * Mínimo (MIN):
+        Conceito: Usado para analisar um conjunto de valores e retorna o menor entre eles.
+        Exemplos:
+          1 - Consultar o produto com menor valor:
+            SELECT MIN(preco) FROM produto;
+          2 - Consultar o menor preço de venda em cada categoria de produto:
+            SELECT idCategoria, MIN(preco) FROM produto GROUP BY idCategoria;
+      * Soma (SUM):
+        Conceito: Usado para realizar soma dos valores em uma única coluna e retorna esse resultado.
+        Exemplos:
+          1 - Consultar a soma de todos os produtos:
+            SELECT SUM(preco) FROM produto;
+          2 - Consultar a soma de todos os preços de venda dos produtos, onde categoria igual a 1:
+            SELECT SUM(preco) FROM produto WHERE idCategoria = 1;
+      * Valor médio (AVG):
+        Conceito: Usado para calcular a média aritmética dos valores em uma única coluna.
+        Exemplos:
+          1 - Consultar o valor médio dos produtos:
+            SELECT AVG(preco) FROM produto;
+          2 - Consultar o valor médio dos produtos em cada categoria:
+            SELECT idCategoria, AVG(preco) FROM produto GROUP BY idCategoria;
+      * Arredondar (ROUND):
+        Conceito: Usado para arredondar valores mediante as casas decimais passadas para a função.
+        Exemplo:
+          1 - Calcular a média aritmética dos produtos e arredondar o valor com duas casas decimais:
+            SELECT ROUND(AVG(preco), 2) FROM produto;
+      * Contar (COUNT):
+        Conceito: Usado para retorna o total de linhas de uma tabela.
+        Exemplo:
+          1 - Calcular a quantidade de produtos cadastrados com a categoria 1.
+            SELECT COUNT(preco) AS Quantidade FROM produto WHERE idCategoria = 1;
