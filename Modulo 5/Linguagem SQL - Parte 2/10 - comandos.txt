@@ -184,3 +184,79 @@ Funções de Agrupamento e Ordenação:
               Exemplo:
                 1 - Ordenar os preços dos produtos do mais caro para o mais barato:
                   SELECT nome, preco FROM produto ORDER BY preco DESC;
+
+Funções de Data e Hora:
+  Conceito: Recursos nativos para tratamento e formação de hora e data.
+  Quais as funções existentes?
+    Resposta:
+      * Data atual (CURDATE):
+        Conceito: Usada para retornar a data atual (formato aaaa-mm-dd).
+        Exemplo:
+          1 - Atualizar o campo 'updatedAt' da tabela 'produto' com a data atual:
+            UPDATE produto set updatedAt = CURDATE() WHERE codigo = 1;
+      * Horário atual (CURTIME):
+        Conceito: Usado para retornar o horário atual (formato hh:mm:ss).
+        Exemplo:
+          1 - Atualizar o campo 'updatedAtTime' da tabela 'produto' com o horário atual:
+            UPDATE produto set updatedAtTime = CURTIME() WHERE codigo = 1;
+        Existe outro método de usar?
+          Resposta: Sim, usando o comando 'CURRENT_TIME'.
+      * Adicionar intervalo de data (DATE_ADD):
+        Conceito: Usado para adicionar um intervalo à uma data.
+        Exemplo:
+          1 - Atualizar o campo 'dataVenc' da tabela 'produto' adicionando um intervalo de 7 dias:
+            UPDATE produto set dataVenc = DATE_ADD(CURDATE(), INTERVAL 7 DAY) WHERE codigo = 2;
+      * Subtrair intervalo de data (DATE_SUB):
+        Conceito: Usado para subtrair um intervalo de uma data.
+        Exemplo:
+          1 - Atualizar o campo 'dataCompra' de um item da tabela 'produto', subtraindo um intervalo de 10 dias:
+            UPDATE produto set dataCompra = DATE_SUB(CURDATE(), INTERVAL 10 DAY) WHERE codigo = 3;
+      * Formatar data (DATE_FORMAT):
+        Conceito: Usado para retornar a data no formato especificado.
+        Exemplo:
+          1 - Atualizar o campo 'updatedAt' da tabela 'produto' para o formato usado no Brasil (dd/mm/yyyy):
+            UPDATE produto set updatedAt = DATE_FORMAT(CURDATE(), '%d/%m/%Y') WHERE codigo = 1;
+      * Nome do dia da semana (DAYNAME):
+        Conceito: Usado para retornar o nome do dia da semana
+        Exemplo:
+          1 - Atualizar o campo 'updatedOnDayNameWeek' da tabela 'produto' para o nome do dia da semana atual (retorna o nome em inglês):
+            UPDATE produto set updatedOnDayNameWeek = DAYNAME(CURDATE()) WHERE codigo = 1;
+        É possível retornar o nome do dia da semana em pt-BR?
+          Resposta: Sim, basta usar o comando abaixo antes do comando 'UPDATE':
+            SET LC_TIME_NAMES = 'pt_BR';
+      * Dia do mês (DAYOFMONTH):
+        Conceito: Usado para retornar o dia do mês
+        Exemplo:
+          1 - Atualizar o campo 'updatedOnDay' da tabela 'produto' para o dia do mês atual (retorna o nome em inglês):
+            UPDATE produto set updatedOnDay = DAYOFMONTH(CURDATE()) WHERE codigo = 1;
+        É possível retornar o dia do mês em pt-BR?
+          Resposta: Sim, basta usar o comando abaixo antes do comando 'UPDATE':
+            SET LC_TIME_NAMES = 'pt_BR';
+      * Dia da semana (DAYOFWEEK):
+        Conceito: Usado para retornar o dia da semana
+        Exemplo:
+          1 - Atualizar o campo 'updatedOnDayWeek' da tabela 'produto' para o dia da semana atual (retorna o nome em inglês):
+            UPDATE produto set updatedOnDayWeek = DAYOFWEEK(CURDATE()) WHERE codigo = 1;
+        É possível retornar o dia da semana atual em pt-BR?
+          Resposta: Sim, basta usar o comando abaixo antes do comando 'UPDATE':
+            SET LC_TIME_NAMES = 'pt_BR';
+      * Dia do ano (DAYOFYEAR):
+        Conceito: Usado para retornar o dia do ano (1 ano tem +- 365 dias)
+        Exemplo:
+          1 - Atualizar o campo 'updatedOnDayYear' da tabela 'produto' para o dia do ano atual (retorna o nome em inglês):
+            UPDATE produto set updatedOnDayYear = DAYOFYEAR(CURDATE()) WHERE codigo = 1;
+        É possível retornar o dia do ano atual em pt-BR?
+          Resposta: Sim, basta usar o comando abaixo antes do comando 'UPDATE':
+            SET LC_TIME_NAMES = 'pt_BR';
+      * Data e hora atual (NOW):
+        Conceito: Usado para retornar a data e hora atual (formato aaaa-mm-dd hh:mm:ss)
+        Exemplo:
+          1 - Atualizar o campo 'updatedAt' da tabela 'produto' para a data e hora atual:
+            UPDATE produto set updatedAt = NOW() WHERE codigo = 1;
+        Existe outro método de usar?
+          Resposta: Sim, usando o comando 'CURRENT_TIMESTAMP'.
+      * Diferença entre horários (TIME_DIFF):
+        Conceito: Usado para retornar a diferença entre 2 horários
+        Exemplo:
+          1 - Atualizar o campo 'updatedIn' da tabela 'produto' para a diferença entre a data de início e a data de fim da transação:
+            UPDATE produto set updatedIn = TIME_DIFF('22:03:15', CURTIME()) WHERE codigo = 1;
