@@ -14,23 +14,23 @@ SELECT * FROM produto;
 SELECT * FROM professor;
 SELECT * FROM turma;
 
-/* INSERE DADOS NA TABELA 'paciente' */
+/* INSERI DADOS NA TABELA 'paciente' */
 INSERT INTO paciente (nome, endereco, bairro, cidade, estado, cep, data_nasc)
 	VALUES ('Jose Carlos', 'Av. de Teste', 'Centro', 'São Paulo', 'SP', '12345-000', '2000-03-24');
 
-/* INSERE DADOS NA TABELA 'tipo_produto' */
+/* INSERI DADOS NA TABELA 'tipo_produto' */
 INSERT INTO tipo_produto (descricao)
 	VALUES ('Notebook');
 
-/* INSERE DADOS NA TABELA 'produto' */
+/* INSERI DADOS NA TABELA 'produto' */
 INSERT INTO produto (nome, preco, idTipo_produto)
 	VALUES ('Dell i7 - 8th Gen', 3994.00, 1);
 
-/* INSERE DADOS NA TABELA 'professor' */
+/* INSERI DADOS NA TABELA 'professor' */
 INSERT INTO professor (nome, telefone)
 	VALUES ('Carlos Eduardo', '+5543977449955');
 
-/* INSERE DADOS NA TABELA 'turma' */
+/* INSERI DADOS NA TABELA 'turma' */
 INSERT INTO turma (capacidade, idProfessor)
 	VALUES (50, 1);
 
