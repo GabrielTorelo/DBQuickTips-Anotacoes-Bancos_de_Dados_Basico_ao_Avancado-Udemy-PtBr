@@ -25,7 +25,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `pratica_1`.`produto` (
   `idProduto` INT NOT NULL AUTO_INCREMENT,
   `idTipo_produto` INT NOT NULL,
-  `descricao` VARCHAR(45) NOT NULL,
+  `nome` VARCHAR(45) NOT NULL,
   `preco` DECIMAL(8,2) NOT NULL,
   PRIMARY KEY (`idProduto`),
   INDEX `fk_produto_idx` (`idTipo_produto` ASC) VISIBLE,
