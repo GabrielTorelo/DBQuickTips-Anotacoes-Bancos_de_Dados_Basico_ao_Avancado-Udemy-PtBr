@@ -68,7 +68,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pratica_1`.`professor` (
   `idProfessor` INT NOT NULL AUTO_INCREMENT,
-  `telefone` INT NOT NULL,
+  `telefone` VARCHAR(14) NOT NULL,
   `nome` VARCHAR(80) NOT NULL,
   PRIMARY KEY (`idProfessor`))
 ENGINE = InnoDB;
