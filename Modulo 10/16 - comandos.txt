@@ -1,0 +1,106 @@
+Sintaxes diferentes no SQLite:
+  * INT => INTEGER
+  * VARCHAR => TEXT
+  * DECIMAL => REAL
+  * AUTO_INCREMENT  => AUTOINCREMENT
+
+Exemplo de criação de tabelas no SQLite:
+  * Cria a tabela 'tipo_produto':
+    CREATE TABLE "tipo_produto" (
+      "idTipo_produto"	INTEGER NOT NULL,
+      "descricao"	TEXT NOT NULL,
+      PRIMARY KEY("idTipo_produto" AUTOINCREMENT)
+    );
+  * Cria a tabela 'produto':
+    CREATE TABLE "produto" (
+      "idProduto"	INTEGER NOT NULL,
+      "descricao"	TEXT NOT NULL,
+      "preco"	REAL NOT NULL,
+      "idTipo_produto"	INTEGER NOT NULL,
+      PRIMARY KEY("idProduto" AUTOINCREMENT),
+      FOREIGN KEY("idTipo_produto") REFERENCES "tipo_produto"("idTipo_produto")
+    );
+  * Cria a tabela 'paciente':
+    CREATE TABLE paciente (
+      idPaciente INTEGER PRIMARY KEY AUTOINCREMENT,
+      nome TEXT NOT NULL,
+      endereco TEXT NOT NULL,
+      bairro TEXT NOT NULL,
+      cidade TEXT NOT NULL,
+      estado TEXT NOT NULL,
+      cep TEXT NOT NULL,
+      data_nasc TEXT NOT NULL
+    );
+  * Cria a tabela 'professor':
+    CREATE TABLE professor (
+      idProfessor INTEGER PRIMARY KEY AUTOINCREMENT,
+      telefone INTEGER NOT NULL,
+      nome TEXT NOT NULL
+    );
+  * Cria a tabela 'turma':
+    CREATE TABLE "turma" (
+      "idTurma"	INTEGER NOT NULL,
+      "capacidade"	INTEGER NOT NULL,
+      "idProfessor"	INTEGER NOT NULL,
+      PRIMARY KEY("idTurma" AUTOINCREMENT),
+      FOREIGN KEY("idProfessor") REFERENCES "professor"("idProfessor")
+    );
+
+Exemplo de inserção de dados em tabelas no SQLite:
+  * Inserindo dados na tabela 'tipo_produto':
+    INSERT INTO tipo_produto (descricao)
+      VALUES ('Computadores');
+    INSERT INTO tipo_produto (descricao)
+      VALUES ('Impressoras');
+    INSERT INTO tipo_produto (descricao)
+      VALUES ('Diversos');
+  * Inserindo dados na tabela 'produto':
+    INSERT INTO produto (descricao, preco, idTipo_produto)
+      VALUES ('Notebook DELL 1544', 2345.67, 1);
+    INSERT INTO produto (descricao, preco, idTipo_produto)
+      VALUES ('Impr. Jato de Tinta', 456.00, 2);
+    INSERT INTO produto (descricao, preco, idTipo_produto)
+      VALUES ('Mouse sem fio', 45, 3);
+  * Inserindo dados na tabela 'paciente':
+    INSERT INTO paciente (nome, endereco, bairro, cidade, estado, cep, data_nasc) 
+      VALUES ('Angelina Jolie', 'Rua da paz, 44', 'Nova Lima', 'Santos', 'SP', '121213213', '1978-04-24');
+  * Inserindo dados na tabela 'professor':
+    INSERT INTO professor (telefone, nome)
+      VALUES (12345, 'Fernando Perez');
+  * Inserindo dados na tabela 'turma':
+    INSERT INTO turma (capacidade, idProfessor)
+      VALUES (50, 1);
+
+Exemplo de consultas no SQLite:
+  * Consultar todos os tipos de produtos:
+    SELECT * FROM tipo_produto;
+  * Consultar todos os produtos:
+    SELECT * FROM produto;
+  * Consultar todos os pacientes:
+    SELECT * FROM paciente;
+  * Consultar todos os professores:
+    SELECT * FROM professor;
+  * Consultar todos as turmas:
+    SELECT * FROM turma;
+  * Consultar produtos com 'preco' maior que R$ 100,00
+    SELECT * FROM produto WHERE preco > 100;
+  * Usando o Aliases:
+    SELECT prod.idProduto AS 'ID', prod.descricao AS 'Nome', prod.preco AS 'Preço'
+      FROM produto AS prod;
+  * Consulta 'idProduto', 'descricao', 'preco' e 'tipo' do produto:
+    SELECT prod.idProduto AS 'ID', prod.descricao AS 'Nome', prod.preco AS 'Preço', t.descricao AS 'Tipo do Produto' 
+      FROM produto AS prod, tipo_produto AS t
+      WHERE prod.idTipo_produto = t.idTipo_produto;
+
+Exemplo de atualização de dados em tabelas no SQLite:
+  * Atualizando dados na tabela 'tipo_produto':
+    UPDATE tipo_produto set descricao = 'Nobreak' WHERE idTipo_produto = 3;
+  * Atualizando dados na tabela 'produto':
+    UPDATE produto set descricao = 'Notebook', preco = '2800' WHERE idProduto = 2;
+  * Atualizando dados na tabela 'paciente':
+    UPDATE paciente set nome = 'Gabriel' WHERE idPaciente = 1;
+  * Atualizando dados na tabela 'professor':
+    UPDATE professor set nome = 'Jose' WHERE idProfessor = 1;
+  * Atualizando dados na tabela 'turma':
+    UPDATE turma set capacidade = 100 WHERE idTurma = 1;
+    
