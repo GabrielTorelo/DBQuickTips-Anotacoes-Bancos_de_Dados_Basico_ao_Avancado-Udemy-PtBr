@@ -1,0 +1,85 @@
+Quando usar SQL ou NoSQL?
+  Resposta:
+    * SQL: Usado quando temos dados estruturados, relacionais e que exigem integridade e consistência.
+    * NoSQL: Usado para dados não estruturados, com grande volume, que requerem escalabilidade e velocidade de acesso.
+  Ou seja: Preferencialmente devemos usar "NoSQL" quando não necessitamos usar um esquema bem definido de dados.
+
+Comandos básicos do MongoDB:
+  1 - Criação e uso de "Banco de Dados" (caso não exista é criado automáticamente):
+    use nome_BD;
+  2 - Consultar qual "Banco de Dados" estou conectado:
+    db;
+  3 - Consultar todos os "Bancos de Dados" existentes no sistema:
+    show dbs;
+  4 - Consultar as coleções do "Banco de Dados" atual:
+    show collections;
+
+Documentos e Coleções do MongoDB:
+  Conceito: A criação de uma nova coleção é feita com a inserção de um dado (documento).
+  Analogia: 
+    * Coleção: Podemos fazer uma analogia com as "tabelas" no "Banco de Dados" relacional (SQL).
+    * Documento: Podemos fazer uma analogia com as "linhas" no "Banco de Dados" relacional (SQL).
+  Formato: Os dados (documentos) a serem inseridos em uma coleção devem estar no formato JSON.
+  Exemplo:
+    1 - Criar um DOCUMENTO dentro da COLEÇÃO "pessoa":
+      db.pessoa.insertOne(
+        {
+          name: 'Márcio Vinicius',
+          email: 'marcio@gmail.com',
+          genero: 'M'
+        }
+      );
+    2 - Criar vários DOCUMENTOS dentro da COLEÇÃO "pessoa":
+      db.pessoa.insertMany([
+        {
+          name: 'Márcio Vinicius',
+          email: 'marcio@gmail.com',
+          genero: 'M'
+        },
+        {
+          name: 'José da Costa',
+          email: 'jcosta@gmail.com',
+          genero: 'M'
+        },
+        {
+          name: 'Janaina Ferraz',
+          email: 'janaferraz@gmail.com',
+          genero: 'F'
+        }
+      ]);
+    3 - Consultar todos os documentos dentro de uma coleção:
+      db.pessoa.find();
+    4 - Consultar documentos específicos dentro de uma coleção:
+      db.pessoa.find({ genero: 'M' });
+    5 - Consultar o 1º documento que possuir a especificação:
+      db.pessoa.findOne({ genero: 'M' });
+    6 - Atualizar um documento dentro de uma coleção:
+      db.pessoa.updateOne(
+        { _id: ObjectId('ID_DO_USUARIO') },
+        { $set: { email: 'janaf@gmail.com' } }
+      );
+    7 - Atualizar vários documentos dentro de uma coleção:
+      db.pessoa.updateMany(
+        { genero: 'M' },
+        { $set: { status: 1 } }
+      );
+    8 - Busca e atualiza um documento dentro de uma coleção:
+      db.pessoa.findAndModify({
+          query: { email: 'jcosta@gmail.com' },
+          update: { $set: { name: 'José da Costa Silva' } },
+          new: true
+      });
+    9 - Remover um documento dentro de uma coleção:
+      db.pessoa.deleteOne(
+        { _id: ObjectId('ID_DO_USUARIO') },
+      );
+    10 - Remover vários documentos dentro de uma coleção:
+      db.pessoa.deleteMany(
+        { genero: 'M' },
+      );
+    11 - Remover uma coleção:
+      db.pessoa.drop();
+    12 - Estimar o número de documentos dentro de uma coleção:
+      db.pessoa.estimatedDocumentCount();
+    13 - Contar precisamente o número de documentos dentro de uma coleção:
+      db.pessoa.countDocuments();
