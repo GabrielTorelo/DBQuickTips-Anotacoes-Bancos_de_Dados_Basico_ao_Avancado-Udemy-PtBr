@@ -4,7 +4,7 @@ Sintaxes diferentes no SQLite:
   * DECIMAL => REAL
   * AUTO_INCREMENT  => AUTOINCREMENT
 
-Exemplo de criação de tabelas no SQLite:
+Exemplos de criação de tabelas no SQLite:
   * Cria a tabela 'tipo_produto':
     CREATE TABLE "tipo_produto" (
       "idTipo_produto"	INTEGER NOT NULL,
@@ -46,7 +46,7 @@ Exemplo de criação de tabelas no SQLite:
       FOREIGN KEY("idProfessor") REFERENCES "professor"("idProfessor")
     );
 
-Exemplo de inserção de dados em tabelas no SQLite:
+Exemplos de inserção de dados em tabelas no SQLite:
   * Inserindo dados na tabela 'tipo_produto':
     INSERT INTO tipo_produto (descricao)
       VALUES ('Computadores');
@@ -55,6 +55,8 @@ Exemplo de inserção de dados em tabelas no SQLite:
     INSERT INTO tipo_produto (descricao)
       VALUES ('Diversos');
   * Inserindo dados na tabela 'produto':
+    INSERT INTO produto (descricao, preco, idTipo_produto)
+      VALUES ('Notebook Positivo', 1750.00, 1);
     INSERT INTO produto (descricao, preco, idTipo_produto)
       VALUES ('Notebook DELL 1544', 2345.67, 1);
     INSERT INTO produto (descricao, preco, idTipo_produto)
@@ -71,7 +73,7 @@ Exemplo de inserção de dados em tabelas no SQLite:
     INSERT INTO turma (capacidade, idProfessor)
       VALUES (50, 1);
 
-Exemplo de consultas no SQLite:
+Exemplos de consultas no SQLite:
   * Consultar todos os tipos de produtos:
     SELECT * FROM tipo_produto;
   * Consultar todos os produtos:
@@ -92,9 +94,12 @@ Exemplo de consultas no SQLite:
       FROM produto AS prod, tipo_produto AS t
       WHERE prod.idTipo_produto = t.idTipo_produto;
 
-Exemplo de atualização de dados em tabelas no SQLite:
+Exemplos de atualização de dados e tabela no SQLite:
+  * Atualizando a tabela 'tipo_produto':
+    ALTER TABLE tipo_produto ADD peso REAL;
   * Atualizando dados na tabela 'tipo_produto':
     UPDATE tipo_produto set descricao = 'Nobreak' WHERE idTipo_produto = 3;
+    UPDATE tipo_produto set peso = 400 WHERE idTipo_produto = 3;
   * Atualizando dados na tabela 'produto':
     UPDATE produto set descricao = 'Notebook', preco = '2800' WHERE idProduto = 2;
   * Atualizando dados na tabela 'paciente':
@@ -103,4 +108,83 @@ Exemplo de atualização de dados em tabelas no SQLite:
     UPDATE professor set nome = 'Jose' WHERE idProfessor = 1;
   * Atualizando dados na tabela 'turma':
     UPDATE turma set capacidade = 100 WHERE idTurma = 1;
-    
+
+Exemplos de remoção de dados e tabela no SQLite:
+  * Removendo todos os dados da tabela 'tipo_produto':
+    DELETE FROM tipo_produto;
+  * Removendo dados específicos da tabela 'tipo_produto':
+    DELETE FROM tipo_produto WHERE idTipo_produto = 3;
+  * Removendo a tabela 'tipo_produto':
+    DROP TABLE tipo_produto;
+
+Exemplos de transações no SQLite:
+  * Transação simples para inserir dados na tabela 'produto'
+    BEGIN TRANSACTION;
+      INSERT INTO produto (descricao, preco, idTipo_produto)
+        VALUES ('Teclado Multilaser', 126.30.67, 3);
+      INSERT INTO produto (descricao, preco, idTipo_produto)
+        VALUES ('Impressora comum', 262.00, 2);
+    COMMIT;
+  * Reverter Transação (somente se não tiver sido feito o 'COMMIT'):
+    ROLLBACK;
+
+Exemplos de junção de tabelas no SQLite:
+  * Consulta 'idProduto', 'descricao', 'preco' e 'tipo' do produto:
+    SELECT prod.idProduto AS 'ID', prod.descricao AS 'Nome', prod.preco AS 'Preço', t.descricao AS 'Tipo do Produto' 
+      FROM produto AS prod
+      INNER JOIN tipo_produto AS t
+      ON prod.idTipo_produto = t.idTipo_produto;
+  * Consultar os dados das tabelas 'produto' e 'tipo_produto' com os dados da tabela 'tipo_produto' correspondendo aos dados da tabela 'produto':
+    SELECT * FROM produto AS prod
+      LEFT OUTER JOIN tipo_produto AS t
+      ON prod.idTipo_produto = t.idTipo_produto;
+  * Consultar cada produto e colocar uma linha com cada 'tipo_produto'.
+    SELECT prod.idProduto AS 'ID', prod.descricao AS 'Nome', prod.preco AS 'Preço', t.descricao AS 'Tipo do Produto' 
+      FROM produto AS prod
+      CROSS JOIN tipo_produto AS t;
+  * Consultar na tabela 'produto' os IDs diferentes, porém, com o 'idTipo_produto' igual:
+    SELECT prod1.descricao AS 'Produto 1', prod2.descricao AS 'Produto 2', prod1.idTipo_produto AS 'ID do Tipo'
+      FROM produto AS prod1
+      INNER JOIN produto AS prod2
+      ON prod1.idProduto <> prod2.idProduto
+      AND prod1.idTipo_produto = prod2.idTipo_produto;
+
+Exemplos de funções de agregação no SQLite:
+  * Consultar o produto com maior valor:
+    SELECT descricao AS 'Nome', MAX(preco) AS 'Valor' FROM produto;
+  * Consultar o produto com menor valor:
+    SELECT descricao AS 'Nome', MIN(preco) AS 'Valor' FROM produto;
+  * Consultar a soma de todos os produtos:
+    SELECT SUM(preco) AS 'Valor Total dos Produtos' FROM produto;
+  * Consultar o valor médio dos produtos:
+    SELECT AVG(preco) AS 'Valor Médio dos Produtos' FROM produto;
+  * Calcular a média aritmética dos produtos e arredondar o valor com duas casas decimais:
+    SELECT ROUND(AVG(preco), 2) AS 'Valor Médio dos Produtos' FROM produto;
+  * Calcular a quantidade de produtos cadastrados com o 'idTipo_produto' 1.
+    SELECT idTipo_produto AS 'ID do Tipo', COUNT(preco) AS 'Quantidade'
+      FROM produto WHERE idTipo_produto = 1;
+
+Exemplos de funções de agrupamento e ordenação no SQLite:
+  * Consultar o valor médio dos produtos em cada tipo:
+    SELECT idTipo_produto, AVG(preco) FROM produto GROUP BY idTipo_produto;
+  * Consultar o maior preço de venda de cada tipo de produtos, na qual o preço seja maior que 50,00:
+    SELECT idTipo_produto, MAX(preco) FROM produto GROUP BY idTipo_produto HAVING MAX(preco) > 50;
+  * Ordenar os preços dos produtos do mais barato para o mais caro:
+    SELECT descricao, preco FROM produto ORDER BY preco ASC;
+  * Ordenar os preços dos produtos do mais caro para o mais barato:
+    SELECT descricao, preco FROM produto ORDER BY preco DESC;
+
+Exemplos de funções de data e hora:
+  * Consultar a data atual:
+    SELECT date();
+  * Consultar a hora atual:
+    SELECT time();
+  * Consultar a data e hora atual:
+    SELECT datetime();
+  * Formatar data no formato do Brasil:
+    SELECT strftime('%d/%m/%Y') AS 'Data no formato Brasileiro';
+  * Formatar data e hora no formato do Brasil:
+    SELECT strftime('%d/%m/%Y - %H:%M:%S')
+      AS 'Data e hora no formato Brasileiro';
+  * Consultar a data e hora local:
+    SELECT datetime('now', 'localtime');
