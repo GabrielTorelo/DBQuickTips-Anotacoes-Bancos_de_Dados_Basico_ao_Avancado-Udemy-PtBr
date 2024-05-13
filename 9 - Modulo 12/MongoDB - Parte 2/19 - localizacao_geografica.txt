@@ -1,0 +1,43 @@
+Exemplo de Geolocalização:
+  Conceito: O MongoDB disponibiliza algumas ferramentas para trabalhar com geolocalização de forma simples.
+  Exemplo:
+    1 - Atualizar um documento adicionando uma geolocalização:
+      db.pessoa.updateOne(
+        { _id: ObjectId('ID_DO_USUARIO') },
+        {
+          $set: {
+            location: {
+              address: 'Avenida Paulista, 1374',
+              coordinates: [-23.562700, -46.654610],
+              type: 'Point'
+            }
+          }
+        }
+      );
+    2 - Definir qual o índice será usado para buscar um geolocalização:
+      db.pessoa.createIndex(
+        {
+          location: '2dsphere'
+        }
+      );
+    3 - Consultar quais documentos possuem proximidade geográfica:
+      db.pessoa.aggregate(
+        [
+          {
+            $geoNear: {
+              near: {
+                coordinates: [-23.562700, -46.654610],
+                type: 'Point'
+              },
+              distanceField: 'distance',
+              spherical: true
+            }
+          },
+          {
+            $limit: 2
+          },
+          {
+            $skip: 1
+          }
+        ]
+      )
