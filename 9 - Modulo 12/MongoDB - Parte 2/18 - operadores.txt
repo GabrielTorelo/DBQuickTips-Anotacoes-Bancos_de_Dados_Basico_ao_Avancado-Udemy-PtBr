@@ -93,3 +93,13 @@ Exemplo de operadores:
             }
           }
         );
+  * .sort (organizar):
+    Exemplo:
+      1 - Consultar documentos e ordenar por ordem alfabética em uma coleção:
+        db.pessoa.find().sort({
+          "name": 1
+        });
+  * .limit (limite):
+    Exemplo:
+      1 - Consultar documentos em uma coleção, limitando o retorno em apenas dois:
+        db.pessoa.find().limit(2);
