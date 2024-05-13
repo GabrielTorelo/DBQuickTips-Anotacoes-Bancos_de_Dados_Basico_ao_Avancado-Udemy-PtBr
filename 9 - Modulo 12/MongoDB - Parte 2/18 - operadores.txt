@@ -1,0 +1,67 @@
+Exemplo de operadores:
+  * $or (ou):
+    Exemplo:
+      1 - Consultar documentos que possuam um ou outro valor no campo em uma coleção:
+        db.pessoa.find({
+          $or: [
+            { status: 1 },
+            { status: 2 }
+          ]
+        });
+  * $ne (não é igual):
+    Exemplo:
+      1 - Consultar na coleção os documentos que não são iguais ao valor do campo especificado:
+        db.pessoa.find({ status: { $ne: 1 } });
+  * $gt (maior que):
+    Exemplo:
+      1 - Consultar documentos que o valor do campo é maior que o especificado:
+        db.pessoa.find({ status: { $gt: 1 } });
+  * $gte (maior ou igual):
+    Exemplo:
+      1 - Consultar documentos que o valor do campo é maior ou igual ao especificado:
+        db.pessoa.find({ status: { $gte: 1 } });
+  * $lt (menor que):
+    Exemplo:
+      1 - Consultar documentos que o valor do campo é menor que o especificado:
+        db.pessoa.find({ status: { $lt: 1 } });
+  * $lte (menor ou igual):
+    Exemplo:
+      1 - Consultar documentos que o valor do campo é menor ou igual ao especificado:
+        db.pessoa.find({ status: { $lte: 1 } });
+  * $exists (existe):
+    Exemplo:
+      1 - Consultar documentos onde o campo especificado existe:
+        db.pessoa.find({
+          status: {
+            $exists: true
+          }
+        });
+  * $not (negação):
+    Exemplo:
+      1 - Negar a consulta realizada (inverter a consulta, se sim, retorna não):
+        db.pessoa.find({
+          status: {
+            $not: {
+              $exists: true
+            }
+          }
+        });
+  * $regex (expressão regular)
+    Exemplo:
+      1 - Consultar documentos onde a expressão regular corresponder:
+        db.pessoa.find({
+          name: {
+            $regex: /.*o.*/i
+          }
+        });
+  * $in (em):
+    Exemplo:
+      1 - Consultar documentos onde o campo possui algum dos valores especificados:
+        db.pessoa.find({
+          email: {
+            $in: [
+              /.*@gmail.com/,
+              /.*@hotmail.com/
+            ]
+          }
+        });
