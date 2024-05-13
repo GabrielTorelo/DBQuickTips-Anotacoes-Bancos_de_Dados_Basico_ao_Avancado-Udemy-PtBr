@@ -65,3 +65,31 @@ Exemplo de operadores:
             ]
           }
         });
+  * $set (definir):
+    Exemplo:
+      1 - Atualizar um documento dentro de uma coleção:
+        db.pessoa.updateOne(
+          { _id: ObjectId('ID_DO_USUARIO') },
+          { $set: { email: 'janaf@gmail.com' } }
+        );
+  * $push (empurrar):
+    Exemplo:
+      1 - Atualizar um documento dentro de uma coleção, adicionando um novo elemento em um array:
+        db.pessoa.updateOne(
+          { _id: ObjectId('ID_DO_USUARIO') },
+          { $push: { notas: 8.3 } }
+        );
+
+  * $each (cada):
+    Exemplo:
+      1 - Atualizar um documento dentro de uma coleção, adicionando vários elementos em um array:
+        db.pessoa.updateOne(
+          { _id: ObjectId('ID_DO_USUARIO') },
+          {
+            $push: {
+              notas: {
+                $each: [8.3, 9.6, 6.8]
+              }
+            }
+          }
+        );
